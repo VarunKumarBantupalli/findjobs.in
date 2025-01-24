@@ -8,6 +8,8 @@ const Joblisting = () => {
 
   const [showFilter ,setShowFilter] = useState(false);
 
+  const [currentPage , setCurrentPage] = useState(1);
+
   return (
     <div className="container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8">
       {/* Sidebar */}
@@ -95,10 +97,37 @@ const Joblisting = () => {
 
         {/* Job Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {jobs.map((job, index) => (
+          {jobs.slice((currentPage-1)*6 , currentPage*6).map((job, index) => (
             <Jobcard key={index} props={job} />
           ))}
         </div>
+         
+          {
+            jobs.length > 0 && (
+              <div className="pagination flex justify-center items-center space-x-2 mt-10">
+                <a href="#job-list">
+                  <img onClick={() => {setCurrentPage(Math.max(currentPage-1 ,1))}} 
+                   src={assets.left_arrow_icon} alt="" />
+                </a>
+    
+                {
+                  Array.from({length:Math.ceil(jobs.length/6)}).map((_ , index) => (
+                    <a href='#job-list'>
+                      <button key={index} onClick={()=> {setCurrentPage(index+1)}} className={`w-10 h-10 flex  items-center justify-center border border-gray-300 rounded
+                        ${currentPage === index+1 ? 'bg-blue-100 text-blue-500':'text-gray-500'}`}>{index+1}</button>
+                    </a>
+                  ))
+                }
+
+                <a href="#job-list">
+                  <img onClick={() => {setCurrentPage(Math.min(currentPage+1 ,Math.ceil(jobs.length/6)))}}  src={assets.right_arrow_icon} alt="" />
+                </a>
+                
+              </div>
+            )
+          }
+
+        
       </div>
     </div>
   );
