@@ -1,7 +1,13 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import {useNavigate} from 'react-router-dom';
+
+
 
 const Jobcard = ({ props }) => {
+    
+    const navigate  = useNavigate();
+
     return (
         <div className="bg-white shadow-md p-4 rounded-lg border border-gray-200">
             {/* Company Icon */}
@@ -27,10 +33,10 @@ const Jobcard = ({ props }) => {
 
             {/* Buttons */}
             <div className="flex justify-between">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                <button onClick={ () => {navigate(`/apply-job/${props._id}`); scrollTo(0,0)  }}  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Apply Now
                 </button>
-                <button className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">Learn More</button>
+                <button onClick={ () => {navigate(`/apply-job/${props._id}`); scrollTo(0,0)  }} className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">Learn More</button>
             </div>
         </div>
     );
