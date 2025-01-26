@@ -17,6 +17,8 @@ import { jobsData } from "../assets/assets";
 
   const [jobs  , setJobs] = useState([]);
 
+  const [showRecruiterLogin, setShowRecruiterLogin] = useState(false)
+
   const fetchJobs = async() => {
 
     setJobs(jobsData)
@@ -33,7 +35,9 @@ import { jobsData } from "../assets/assets";
     const value = {
       searchFilter,setSearchFilter,
       isSearched,setIsSearched,
-      jobs,setJobs
+      jobs,setJobs,
+      showRecruiterLogin,setShowRecruiterLogin,
+
     }  
 
     return (

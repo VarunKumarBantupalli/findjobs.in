@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { assets } from '../assets/assets'
 import {Link, useNavigate} from 'react-router-dom'
 
 import { useClerk, useUser ,UserButton} from '@clerk/clerk-react'
+import { AppContext } from '../context/AppContext'
+
+
 
 
 const Navbar = () => {
@@ -10,6 +13,8 @@ const Navbar = () => {
    const {openSignIn} = useClerk()
    const {user} = useUser()
    const navigate = useNavigate()
+
+   const {setShowRecruiterLogin} = useContext(AppContext)
 
 
 
@@ -29,7 +34,7 @@ const Navbar = () => {
                         </div>
                         :
                         <div className='flex gap-4 max-sm:text-xs'>
-                        <button onClick={e => openSignIn()} className='text-gray-500'>Recruiter login</button>
+                        <button onClick={() => setShowRecruiterLogin(true) } className='text-gray-500'>Recruiter login</button>
                         <button onClick={e => openSignIn()}  className='text-white bg-blue-500 py-2 rounded-full hover:bg-gray-500 px-6 sm:px-9 '>login</button>
                     </div>
                     }
